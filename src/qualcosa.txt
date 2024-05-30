@@ -1,0 +1,6 @@
+User{firstName='Aldo', lastName='Baglio', age=20, city='Roma'}
+User{firstName='Aldo', lastName='Baglio', age=20, city='Roma'}
+User{firstName='Aldo', lastName='Baglio', age=20, city='Roma'}
+User{firstName='Aldo', lastName='Baglio', age=20, city='Roma'}
+User{firstName='Aldo', lastName='Baglio', age=20, city='Roma'}
+User{firstName='Aldo', lastName='Baglio', age=20, city='Roma'}
