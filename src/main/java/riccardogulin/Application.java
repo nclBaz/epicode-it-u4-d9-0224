@@ -42,5 +42,18 @@ public class Application {
 		// 4. Concateniamo tutte le età degli user per ottenere una stringa tipo "20, 21, 22, ...."
 		String etàConcatenate = usersList.stream().map(user -> String.valueOf(user.getAge())).collect(Collectors.joining(", "));
 		System.out.println(etàConcatenate);
+
+		// 5. Calcolo la media delle età
+		double average = usersList.stream().collect(Collectors.averagingInt(user -> user.getAge()));
+		System.out.println("Media delle età: " + average);
+
+		// 6. Raggruppiamo per città e calcoliamo la media delle età
+		Map<String, Double> mediaEtàPerCittà = usersList.stream().collect(Collectors.groupingBy(user -> user.getCity(), Collectors.averagingInt(user -> user.getAge())));
+		mediaEtàPerCittà.forEach((città, etàMedia) -> System.out.println("Città: " + città + ", media: " + etàMedia));
+
+		// 7. Raggruppiamo per città con informazioni su età media, età più bassa, eta più alta, ...
+		Map<Object, IntSummaryStatistics> raggruppatiPerCittàConStatistiche = usersList.stream().collect(Collectors.groupingBy(user -> user.getCity(),
+				Collectors.summarizingInt(user -> user.getAge())));
+		raggruppatiPerCittàConStatistiche.forEach((città, stats) -> System.out.println("Città: " + città + ", stats: " + stats));
 	}
 }
