@@ -76,5 +76,33 @@ public class Application {
 		// 1. Ordinare la lista degli utenti in base al cognome, saltiamo (skip) i primi 10 e ci facciamo tornare solo 5 elementi (limit)
 		List<User> fiveUsersSortedBySurname = usersList.stream().sorted(Comparator.comparing(user -> user.getLastName())).skip(10).limit(5).toList();
 		fiveUsersSortedBySurname.forEach(user -> System.out.println(user));
+
+		// ***************************************** MAP TO *********************************************
+		System.out.println("***************************************** MAP TO *********************************************");
+		// 1. Calcolo della somma totale delle età degli utenti (con map e reduce)
+		// int totalAge = usersList.stream().map(user -> user.getAge()).reduce(0, (partialSum, currentAge) -> partialSum + currentAge);
+		// int totalAge2 = usersList.stream().reduce(0, (partialSum, currentUser) -> partialSum + currentUser.getAge());
+
+		// 2. Calcolo della somma totale delle età degli utenti (con mapToInt)
+		int totalAge3 = usersList.stream().mapToInt(User::getAge).sum();
+		System.out.println("La somma delle età è: " + totalAge3);
+
+		// 3. Calcolo della media delle età degli utenti (con mapToInt)
+		OptionalDouble average2 = usersList.stream().mapToInt(User::getAge).average();
+		if (average2.isPresent()) {
+			System.out.println("La media delle età è: " + average2.getAsDouble());
+		} else {
+			System.out.println("La media non può essere calcolata perché la lista è vuota");
+		}
+
+		// 4. Restituisce l'età massima
+		OptionalInt etàMassima = usersList.stream().mapToInt(User::getAge).max();
+		if (etàMassima.isPresent()) {
+			System.out.println("L'età massima è: " + etàMassima.getAsInt());
+		} else {
+			System.out.println("Lista vuota quindi non c'è un massimo");
+		}
+
+
 	}
 }
