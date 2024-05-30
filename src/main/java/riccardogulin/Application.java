@@ -55,5 +55,20 @@ public class Application {
 		Map<Object, IntSummaryStatistics> raggruppatiPerCittàConStatistiche = usersList.stream().collect(Collectors.groupingBy(user -> user.getCity(),
 				Collectors.summarizingInt(user -> user.getAge())));
 		raggruppatiPerCittàConStatistiche.forEach((città, stats) -> System.out.println("Città: " + città + ", stats: " + stats));
+
+		// ***************************************** COMPARATORS *********************************************
+		System.out.println("***************************************** COMPARATORS *********************************************");
+		// 1. Ordinare la lista in base all'età (ordine crescente)
+		List<User> usersSortedByAge = usersList.stream().sorted(Comparator.comparingInt(user -> user.getAge())).toList();
+		usersSortedByAge.forEach(user -> System.out.println(user));
+
+		// 2. Ordinare la lista in base all'età (ordine decrescente)
+		List<User> usersSortedByAgeDesc = usersList.stream().sorted(Comparator.comparingInt(User::getAge).reversed()).toList();
+		// se si vuole utilizzare il .reversed() nelle parentesi di comparingInt bisogna mettere User::getAge e non la lambda
+		usersSortedByAgeDesc.forEach(user -> System.out.println(user));
+
+		// 3. Ordinare la lista in base al cognome
+		List<User> usersSortedBySurname = usersList.stream().sorted(Comparator.comparing(user -> user.getLastName())).toList();
+		usersSortedBySurname.forEach(user -> System.out.println(user));
 	}
 }
