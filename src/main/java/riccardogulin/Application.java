@@ -61,14 +61,20 @@ public class Application {
 		// 1. Ordinare la lista in base all'età (ordine crescente)
 		List<User> usersSortedByAge = usersList.stream().sorted(Comparator.comparingInt(user -> user.getAge())).toList();
 		usersSortedByAge.forEach(user -> System.out.println(user));
-
+		System.out.println();
 		// 2. Ordinare la lista in base all'età (ordine decrescente)
 		List<User> usersSortedByAgeDesc = usersList.stream().sorted(Comparator.comparingInt(User::getAge).reversed()).toList();
 		// se si vuole utilizzare il .reversed() nelle parentesi di comparingInt bisogna mettere User::getAge e non la lambda
 		usersSortedByAgeDesc.forEach(user -> System.out.println(user));
-
+		System.out.println();
 		// 3. Ordinare la lista in base al cognome
 		List<User> usersSortedBySurname = usersList.stream().sorted(Comparator.comparing(user -> user.getLastName())).toList();
 		usersSortedBySurname.forEach(user -> System.out.println(user));
+
+		// ***************************************** LIMIT *********************************************
+		System.out.println("***************************************** LIMIT *********************************************");
+		// 1. Ordinare la lista degli utenti in base al cognome, saltiamo (skip) i primi 10 e ci facciamo tornare solo 5 elementi (limit)
+		List<User> fiveUsersSortedBySurname = usersList.stream().sorted(Comparator.comparing(user -> user.getLastName())).skip(10).limit(5).toList();
+		fiveUsersSortedBySurname.forEach(user -> System.out.println(user));
 	}
 }
